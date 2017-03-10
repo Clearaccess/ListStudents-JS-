@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Students</title>
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body class="welcome">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover">
+                <tbody id="table">
+                </tbody>
+                <thead>
+                <tr class="info">
+                    <th class="text-center"> Students</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>E-Mail</th>
+                    <th>Date Birthday</th>
+                    <th>Sex</th>
+                    <th>Course</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <button id="add" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal">
+                Add
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Add/Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" class="form-control" id="middleName" placeholder="Middle Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" class="form-control" id="email" placeholder="E-Mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateBirthday">Date Birthday</label>
+                            <input type="date" class="form-control" id="dateBirthday" placeholder="Date Birthday">
+                        </div>
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <select id="sex" name="sex" class="form-control">
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Course</label>
+                            <input type="number" min="1" max="6" class="form-control" id="course" placeholder="Course">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="actButton" type="button" class="btn btn-primary">Add/Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDel" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="nameModalDel">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>You're sure that you want delete this student?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="actButtonDel" type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/models/elements/Student.js"></script>
+<script src="js/views/view.js"></script>
+<script src="js/models/model.js"></script>
+<script src="js/controllers/mainController.js"></script>
+</body>
+</html>
