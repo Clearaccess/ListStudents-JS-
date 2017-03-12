@@ -3,12 +3,13 @@
 APP.model=(function(){
     
     var Student=APP.Student,
+        orderOfColumn=[1,1,1,1,1,1,1],
         students;
     
     var init=function(){
-        students=[new Student("lastName1", "firstName1", "middleName1", "email1", new Date(2017,2,3,0,0,0,0), "male", 2),
-            new Student("lastName2", "firstName2", "middleName2", "email2", new Date(2017,2,3,0,0,0,0), "female", 3),
-            new Student("lastName3", "firstName3", "middleName3", "email3", new Date(2017,2,3,0,0,0,0), "male", 3)];
+        students=[new Student("lastNameA", "firstNameA", "middleNameA", "email@1", new Date(2017,2,3,0,0,0,0), "male", 2),
+            new Student("lastNameB", "firstNameB", "middleNameB", "email@2", new Date(2017,2,3,0,0,0,0), "female", 3),
+            new Student("lastNameC", "firstNameC", "middleNameC", "email@3", new Date(2017,2,3,0,0,0,0), "male", 3)];
     };
 
     var getStudents=function(){
@@ -35,6 +36,75 @@ APP.model=(function(){
         students[index].setCourse(course);
     };
 
+    var sortListByColumn=function(cellIndex){
+        var compare=_defineCompare(cellIndex);
+        
+        students.sort(compare);
+    };
+
+    var _defineCompare=function(cellIndex){
+        var compare;
+        
+        switch (cellIndex) {
+            case 0:
+                compare = function(a, b) {
+                    return (a.getLastName()>b.getLastName())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+            case 1:
+                compare = function(a, b) {
+                    return (a.getFirstName()>b.getFirstName())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+            case 2:
+                compare = function(a, b) {
+                    return (a.getMiddleName()>b.getMiddleName())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+            case 3:
+                compare = function(a, b) {
+                    return (a.getEmail()>b.getEmail())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+            case 4:
+                compare = function(a, b) {
+                    if(+a.getDateBirthDay().getFullYear()>+b.getDateBirthDay().getFullYear()){
+                        return orderOfColumn[cellIndex];
+                    } else if(+a.getDateBirthDay().getFullYear()<+b.getDateBirthDay().getFullYear()){
+                        return (-1)*orderOfColumn[cellIndex];
+                    }
+
+                    if(+a.getDateBirthDay().getMonth()>+b.getDateBirthDay().getMonth()){
+                        return orderOfColumn[cellIndex];
+                    } else if(+a.getDateBirthDay().getMonth()<+b.getDateBirthDay().getMonth()){
+                        return (-1)*orderOfColumn[cellIndex];
+                    }
+
+                    if(+a.getDateBirthDay().getDate()>+b.getDateBirthDay().getDate()){
+                        return orderOfColumn[cellIndex];
+                    } else if(+a.getDateBirthDay().getDate()<+b.getDateBirthDay().getDate()){
+                        return (-1)*orderOfColumn[cellIndex];
+                    }
+
+                    return 0;
+                };
+                break;
+            case 5:
+                compare = function(a, b) {
+                    return (a.getSex()>b.getSex())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+            case 6:
+                compare = function(a, b) {
+                    return (+a.getCourse()>+b.getCourse())? orderOfColumn[cellIndex]:(-1)*orderOfColumn[cellIndex];
+                };
+                break;
+        }
+        
+        orderOfColumn[cellIndex]*=-1;
+        return compare;
+    };
+
     var _convertToDate=function(date){
         var part=date.split('-');
         return new Date(part[0],part[1]-1,part[2]);
@@ -46,6 +116,7 @@ APP.model=(function(){
         getStudents: getStudents,
         addStudent: addStudent,
         updateStudent: updateStudent,
-        deleteStudent: deleteStudent
+        deleteStudent: deleteStudent,
+        sortListByColumn: sortListByColumn
     };
 })();
